@@ -38,15 +38,14 @@ class CategoryController extends Controller
     {
         $this->validate($request,[
             'title' => 'required',
-            'description'=>'required'
+           
         ]);
         $category = new Category();
         $category->title = $request->title;
-        $category->slug = str_slug($request->title,$request->description);
         $category->description = $request->description;
 
         $category->save();
-        return redirect()->route('admin.category.index');
+        return redirect()->route('category.index')->with('successMsg','Category Successfully Saved');
     }
 
     /**

@@ -1,35 +1,33 @@
 @extends('layouts.app')
 
-@section('title','category')
-
-@push('css')
-@endpush
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Edit That Category</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <!--enctype="multipart/form-data"-->
-                
-                
-<form class="input-group" method="POST" action="{{route('category.store')}}">
-                    <input type="text" class="form-control"id="catname" placeholder="category name" name="title" required ><br>
-                    <input type="text" class="form-control" placeholder="description" id="des" required name="description" >
-                    <!--<br><label for="img"class="form-control">Select image:</label>
-  <input type="file" id="img" name="img" accept="image/*"class="form-control" required >
--->
-                    <span class="input-group-btn">
-                      <button class="btn btn-success btn-xs" type="submit" >Add</button>
-                     
-                    </span>
-</form>
+                <div class="card-content">
+                <form method="POST" action="{{ route('category.update',$category->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Title</label>
+                                            <input type="text" class="form-control" name="title" value="{{ $category->title }}">
+                                            <label class="control-label">Description</label>
+                                            <input type="text" class="form-control" name="description" value="{{ $category->description }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('category.index') }}" class="btn btn-danger">Back</a>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
