@@ -88,7 +88,9 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+        $categories = Category::all();
+        return view('admin.item.edit',compact('item','categories'));
     }
 
     /**
@@ -111,6 +113,13 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        if (file_exists('uploads/item/'.$item->image))
+        {
+            unlink('uploads/item/'.$item->image);
+        }
+        $item->delete();
+        return redirect()->back()->with('successMsg','Item successfully Deleted');
     }
+    
 }
