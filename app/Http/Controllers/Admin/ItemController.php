@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Item;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ItemController extends Controller
 {
@@ -27,8 +30,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $items = item::all();
-        return view('admin.item.create',compact('items'));
+        $categories = Category::all();
+        return view('admin.item.create',compact('categories'));
     }
 
     /**
@@ -47,7 +50,7 @@ class ItemController extends Controller
             'image' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
         $image = $request->file('image');
-        $slug = str_slug($request->name);
+        $slug = Str::slug($request->name);
         if (isset($image))
         {
             $currentDate = Carbon::now()->toDateString();
@@ -105,7 +108,38 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'category' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'image' => 'mimes:jpeg,jpg,bmp,png',
+        ]);
+        $item = Item::find($id);
+        $image = $request->file('image');
+        $slug = Str::slug($request->name);
+        if (isset($image))
+        {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug.'-'.$currentDate.'-'. uniqid() .'.'. $image->getClientOriginalExtension();
+
+            if (!file_exists('uploads/item'))
+            {
+                mkdir('uploads/item',0777,true);
+            }
+            unlink('uploads/item/'.$item->image);
+            $image->move('uploads/item',$imagename);
+        }else{
+            $imagename = $item->image;
+        }
+
+        $item->category_id = $request->category;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->price = $request->price;
+        $item->image = $imagename;
+        $item->save();
+        return redirect()->route('item.index')->with('successMsg','Item Successfully Updated');
     }
 
     /**
