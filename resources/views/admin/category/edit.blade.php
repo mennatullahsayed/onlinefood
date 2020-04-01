@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
+@section('title','edit')
+@push('css')
+@endpush
+
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        
             <div class="card">
                 <div class="card-header">Edit That Category</div>
 
@@ -31,3 +37,6 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+
+@endpush

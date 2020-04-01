@@ -6,6 +6,7 @@
         <div class="col-md-8">
         <a href="{{ route('category.create') }}" class="btn btn-primary">Add New</a>
                     <div class="card">
+                    
                         <div class="card-header" data-background-color="purple">
                             <h4 class="title">All Categories</h4>
                         </div>
