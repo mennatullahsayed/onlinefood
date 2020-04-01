@@ -27,8 +27,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.item.create',compact('categories'));
+        $items = item::all();
+        return view('admin.item.create',compact('items'));
     }
 
     /**
