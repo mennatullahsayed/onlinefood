@@ -27,8 +27,10 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->image }}</td>
-                                            <td>{{ $item->category->name }}</td>
+                                          <!--<td>{{ $item->image }}</td>
+                                          <td><img src="{{asset('public/uploads/'.$item->image)}}"  alt="image" style="width:50px;height:50px" ></td>-->
+                                          <td><img src="{{asset('uploads/'.$item->image)}}" alt="image" style="width:50px;height:50px" ></td>
+                                            <td>{{ $item->category->title }}</td>
                                             <td>{{ $item->description }}</td>
                                             <td>{{ $item->price }}</td>
                                             <td>{{ $item->created_at }}</td>

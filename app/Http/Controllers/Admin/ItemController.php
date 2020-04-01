@@ -49,28 +49,28 @@ class ItemController extends Controller
             'price' => 'required',
             'image' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
-        $image = $request->file('image');
-        $slug = Str::slug($request->name);
-        if (isset($image))
-        {
-            $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug.'-'.$currentDate.'-'. uniqid() .'.'. $image->getClientOriginalExtension();
-
-            if (!file_exists('uploads/item'))
-            {
-                mkdir('uploads/item',0777,true);
-            }
-            $image->move('uploads/item',$imagename);
-        }else{
-            $imagename = "default.png";
-        }
+       
         $item = new Item();
         $item->category_id = $request->category;
         $item->name = $request->name;
         $item->description = $request->description;
         $item->price = $request->price;
-        $item->image = $imagename;
+      $item->image = " ";
         $item->save();
+
+
+        $id= $item->id;
+
+        if($image = $request->file('image')){
+            $destinationPath = 'uploads/'; 
+            $extension = $image->getClientOriginalExtension(); 
+            $fileName = $id.'_itemImage'.'.'.$extension; 
+            
+            $image->move($destinationPath, $fileName); 
+            
+            Item::where('id',$id)->update(['image' => $fileName]); 
+        }
+
         return redirect()->route('item.index')->with('successMsg','Item Successfully Saved');
 
     }
