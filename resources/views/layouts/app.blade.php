@@ -283,12 +283,12 @@
 
         <!-- page content -->
         
-        <main class="py-4"style=" height:800px;display:block;">
+        <main class="py-4"style=" height:820px;display:block;">
           @yield('content')
       </main>
 
         <!-- footer content -->
-        <footer style="height:20px; buttom:0;">
+        <footer style="height:15px; buttom:0;">
           <div class="pull-right">
             Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
