@@ -23,6 +23,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        if(Auth()->user()->permission == '0')
+        {
+            return view('home');
+        }
+        else
+        {
+            return view('customer');
+        } 
+   
     }
+
+
 }
