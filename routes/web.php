@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/customer','HomeController@index')->name('customer');
+//Route::get('/customer', 'Auth\LoginController@redirectTo')->name('customer');
 Route::resource('category', 'Admin\CategoryController');
 Route::resource('item', 'Admin\ItemController');
