@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Category;
+use App\Item;
+use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -30,10 +34,11 @@ class HomeController extends Controller
         }
         else
         {
-            return view('customer');
+           $items = Item::all();
+           return view('admin.item.customer',compact('items'));
         } 
    
     }
 
-
+ 
 }
