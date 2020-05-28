@@ -23,10 +23,10 @@
   </head>
 
   <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
+    <div class="container body" >
+      <div class="main_container" >
          
-          <div class="left_col scroll-view">
+          <div class="left_col scroll-view" >
              
               
 
@@ -38,7 +38,7 @@
 
         <!-- top navigation -->
         <div class="top_nav">
-            <div class="nav_menu">
+            <div class="nav_menu" >
                 <div class="nav toggle">
                   
                 </div>

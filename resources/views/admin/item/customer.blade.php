@@ -1,58 +1,40 @@
+
 @extends('layouts.customer')
 
 @section('content')
 <div class="container">
+<div class="col-md-12">
+    <div class="row justify-content-center">     
+            <h1 class="title" class="jumbotron text-center">order nooow</h1> <br>
+    </div>            
     <div class="row justify-content-center">
-        <div class="col-md-8">
-        
-                    <div class="card">
-                        <div class="card-header" data-background-color="purple">
-                            <h4 class="title">order nooow</h4>
+            
+        @foreach($items as $key=>$item)
+        <div class="col-md-2">
+            <div class="card-deck">
+                <div class="card border-light mb-3" >
+                    <img class="card-img-top" src="{{asset('uploads/'.$item->image)}}" alt="image">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">{{ $item->name }}</h2>
+                        <div class="card-text" >
+                            <p>{{ $item->category->title }} Category </p>
+                            <p>{{ $item->description }}</p>
+                            <h2>{{ $item->price }} LE </h2>
                         </div>
-                        <div class="card-content table-responsive">
-                            <table id="table" class="table"  cellspacing="0" width="100%">
-                                <thead class="text-primary"> 
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Category Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                                </thead>
-                                <tbody>
-                                    @foreach($items as $key=>$item)
-                                        <tr>
-                                            <td>{{ $item->name }}</td>
-                                          <td><img src="{{asset('uploads/'.$item->image)}}" alt="image" style="width:50px;height:50px" ></td>
-                                            <td>{{ $item->category->title }}</td>
-                                            <td>{{ $item->description }}</td>
-                                            <td>{{ $item->price }}</td>
-                                            <td>
-                                                <a href="{{ route('item.edit',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">order</i></a>
-
-                                                <form id="delete-form-{{ $item->id }}" action="{{ route('item.destroy',$item->id) }}" style="display: none;" method="POST">
-                                                  </form>
-                                              <!--button-->
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                        </div>
-                
-                
-                     </div>
-               
-
-
+                        <a href="{{ route('item.edit',$item->id) }}" class="btn btn-info btn-sm"><i class="material-icons">order</i></a>
+                        <form id="delete-form-{{ $item->id }}" action="{{ route('item.destroy',$item->id) }}" style="display: none;" method="POST"></form>
+                         <!--button-->
+                    </div>
+                </div >                                
+           </div >
+           
         </div>
-    </div>
+        @endforeach
+                                   
+                    </div>
+              </div>             
+     </div>   
+    
 </div>
 @endsection
+
